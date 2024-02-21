@@ -13,8 +13,8 @@ vim.keymap.set('i', '<C-r>', function() vim.lsp.buf.rename() end, {desc = 'Renam
 vim.keymap.set('n', '<C-r>', function() vim.lsp.buf.rename() end, {desc = 'Rename'})
 vim.keymap.set('n', '<C-`>', ':belowright split | resize 10 | term <enter><Home>i', {desc = 'Open Terminal'})
 vim.keymap.set('i', '<C-`>', '<C-o>:belowright split | resize 10 | term <enter>', {desc = 'Open Terminal'})
-vim.keymap.set('i', '<C-e>', '<C-o>:NvimTreeToggle <enter>', {desc = 'Toggle Tree'})
-vim.keymap.set('n', '<C-e>', ':NvimTreeToggle <enter>', {desc = 'Toggle Tree'})
+vim.keymap.set('i', '<F2>', '<C-o>:NvimTreeToggle <enter>', {desc = 'Toggle Tree'})
+vim.keymap.set('n', '<F2>', ':NvimTreeToggle <enter>', {desc = 'Toggle Tree'})
 
 
 

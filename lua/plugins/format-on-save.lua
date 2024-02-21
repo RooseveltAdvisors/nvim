@@ -11,8 +11,17 @@ return {
 			},
 			formatter_by_ft = {
 				css = formatters.lsp,
-				go = formatters.lsp,
-			}
+				html = formatters.lsp,
+			
+				go = {
+					formatters.shell({
+						cmd = { "goimports" },
+					}),
+					formatters.shell({
+						cmd = { "gofmt"},
+					}),
+				},
+			},
 		})
 	end
 }
