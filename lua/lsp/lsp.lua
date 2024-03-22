@@ -10,3 +10,5 @@ lspconfig.gopls.setup {}
 lspconfig.cssls.setup{}
 lspconfig.html.setup{}
 lspconfig.htmx.setup{}
+lspconfig.vls.setup{}
+lspconfig.tsserver.setup{}
