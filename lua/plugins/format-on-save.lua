@@ -12,7 +12,8 @@ return {
 			formatter_by_ft = {
 				css = formatters.lsp,
 				html = formatters.lsp,
-			
+				typescript = formatters.prettierd,
+				typescriptreact = formatters.prettierd,
 				go = {
 					formatters.shell({
 						cmd = { "goimports" },
