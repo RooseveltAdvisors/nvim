@@ -1,5 +1,6 @@
 require("core.options")
 require("core.keymaps")
+require("core.lsp")
 require("lazy-setup")
 
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
