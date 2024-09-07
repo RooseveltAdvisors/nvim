@@ -16,6 +16,7 @@ vim.keymap.set('n', '<F2>', ':NvimTreeToggle <enter>', {desc = 'Toggle Tree'})
 
 vim.keymap.set('n', '<C-f>', '<cmd>Telescope live_grep<cr>' , {desc = 'Find in files'})
 vim.keymap.set('n', '<C-f><C-f>', '<cmd>Telescope find_files<cr>' , {desc = 'Find files'})
+vim.keymap.set('t', '<Esc>', '<C-\\><C-n>' , {desc = 'Escape Terminal'})
 
 -- LSP Keybinds
 vim.api.nvim_create_autocmd('LspAttach', {
