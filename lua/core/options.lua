@@ -6,4 +6,6 @@ vim.opt.wrap = true
 vim.opt.breakindent = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
-
+vim.opt.foldnestmax = 1
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'

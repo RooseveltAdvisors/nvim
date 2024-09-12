@@ -105,7 +105,6 @@ local function setup_server(name, root_files, cmd, init_opts)
 	})
 end
 
-
 for _, server in ipairs(server_definitions) do
 	local function start_server_callback()
 		setup_server(server.name, server.root_files, server.cmd, server.init_opts)
