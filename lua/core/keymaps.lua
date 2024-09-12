@@ -1,7 +1,5 @@
 vim.keymap.set('v', '>', '>gv', {desc = 'Indent Selection', remap = false})
 vim.keymap.set('v', '<', '<gv', {desc = 'Unindent Selection', remap = false})
-vim.keymap.set('i', '<C-t>', '<C-o>:t.<enter>', {desc = 'Duplicate Line'})
-vim.keymap.set('n', '<C-t>', ':t.<enter>', {desc = 'Duplicate Line'})
 vim.keymap.set('n', '<M-Up>', ':m .-2<enter>', {desc = 'Move line up'})
 vim.keymap.set('n', '<M-Down>', ':m .+1<enter>', {desc = 'Move line down'})
 vim.keymap.set('i', '<M-Up>', '<C-o>:m .-2<enter>', {desc = 'Move line up'})
@@ -17,6 +15,9 @@ vim.keymap.set('n', '<F2>', ':NvimTreeToggle <enter>', {desc = 'Toggle Tree'})
 vim.keymap.set('n', '<C-f>', '<cmd>Telescope live_grep<cr>' , {desc = 'Find in files'})
 vim.keymap.set('n', '<C-f><C-f>', '<cmd>Telescope find_files<cr>' , {desc = 'Find files'})
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>' , {desc = 'Escape Terminal'})
+
+vim.keymap.set('n', 'z<Up>', 'zk', {desc = 'Previous Fold'})
+vim.keymap.set('n', 'z<Down>', 'zj', {desc = 'Next Fold'})
 
 -- LSP Keybinds
 vim.api.nvim_create_autocmd('LspAttach', {
