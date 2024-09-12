@@ -18,6 +18,7 @@ vim.keymap.set('t', '<Esc>', '<C-\\><C-n>' , {desc = 'Escape Terminal'})
 
 vim.keymap.set('n', 'z<Up>', 'zk', {desc = 'Previous Fold'})
 vim.keymap.set('n', 'z<Down>', 'zj', {desc = 'Next Fold'})
+vim.keymap.set('n', 'ee', '<cmd>lua vim.diagnostic.open_float()<cr>', {desc = 'Show Error'})
 
 -- LSP Keybinds
 vim.api.nvim_create_autocmd('LspAttach', {
