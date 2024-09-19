@@ -1,5 +1,13 @@
 local server_definitions = {
 	{
+		name = "rust",
+		root_files = { "Cargo.toml", "rust-project.json" },
+		cmd = { "rust-analyzer" },
+		init_opts = nil,
+		file_patterns = "rust",
+		docs = 'Install command: rustup component add rust-src && rustup component add rust-analyzer',
+	},
+	{
 		name = "go",
 		root_files = { "go.mod" },
 		cmd = { "gopls" },
