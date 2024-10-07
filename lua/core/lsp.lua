@@ -1,9 +1,30 @@
 local server_definitions = {
 	{
+		name = "dart",
+		root_files = { "pubspec.yaml" },
+    		cmd = { 'dart', 'language-server', '--protocol=lsp' },
+		init_opts = {
+			closingLabels = true,
+			onlyAnalyzeProjectsWithOpenFiles = true,
+			outline = true,
+			suggestFromUnimportedLibraries = true,
+			flutterOutline = true,
+		},
+		settings = {
+      			dart = {
+        			completeFunctionCalls = true,
+        			showTodos = true,
+      			},
+		},
+		file_patterns = "dart",
+		docs = 'Install Dart with the Flutter SDK',
+	},
+	{
 		name = "rust",
 		root_files = { "Cargo.toml", "rust-project.json" },
 		cmd = { "rust-analyzer" },
 		init_opts = nil,
+		settings = {},
 		file_patterns = "rust",
 		docs = 'Install command: rustup component add rust-src && rustup component add rust-analyzer',
 	},
@@ -13,6 +34,7 @@ local server_definitions = {
 		cmd = { "gopls" },
 		init_opts = nil,
 		file_patterns = "go",
+		settings = {},
 		docs = 'Install command: go install golang.org/x/tools/gopls@latest',
 	},
 	{	
@@ -24,6 +46,7 @@ local server_definitions = {
       embeddedLanguages = { css = true, javascript = true },
       configurationSection = { 'html', 'css', 'javascript' },
     },
+		settings = {},
  		file_patterns = {'html', 'templ'},
 		docs = 'Install command: npm install -g vscode-languageservers-extracted',
 	},
@@ -34,6 +57,7 @@ local server_definitions = {
 		init_opts = {
 			provideFormatter = true,
 		},
+		settings = {},
 		file_patterns = {'css', 'scss', 'sass', 'less'},
 		docs = 'Install command: npm install -g vscode-languageservers-extracted',
 	},
@@ -44,6 +68,7 @@ local server_definitions = {
 		init_opts = {
 			single_file_supported = true,
 		},
+		settings = {},
 		file_patterns = { -- filetypes copied and adjusted from tailwindcss-intellisense
       -- html
       'aspnetcorerazor',
@@ -96,7 +121,7 @@ local server_definitions = {
 	},
 }
 
-local function setup_server(name, root_files, cmd, init_opts) 
+local function setup_server(name, root_files, cmd, init_opts, settings) 
 	local paths = vim.fs.find(root_files, { stop = vim.env.HOME })
 	local root_dir = vim.fs.dirname(paths[1])
 
@@ -110,12 +135,13 @@ local function setup_server(name, root_files, cmd, init_opts)
 		cmd = cmd,
 		root_dir = root_dir,
 		init_options = init_opts,
+		settings = settings,
 	})
 end
 
 for _, server in ipairs(server_definitions) do
 	local function start_server_callback()
-		setup_server(server.name, server.root_files, server.cmd, server.init_opts)
+		setup_server(server.name, server.root_files, server.cmd, server.init_opts, server.settings)
 	end
 	
 	vim.api.nvim_create_autocmd('FileType', {
