@@ -1,4 +1,4 @@
-local fmt_group = vim.api.nvim_create_augroup('autoformat_cmds', {clear = true})
+--[[local fmt_group = vim.api.nvim_create_augroup('autoformat_cmds', {clear = true})
 
 local function organize_imports(client, bufnr)
   local params = vim.lsp.util.make_range_params(nil, vim.lsp.util._get_offset_encoding())
@@ -43,4 +43,4 @@ end
 vim.api.nvim_create_autocmd('LspAttach', {
   desc = 'Setup format on save',
   callback = setup_autoformat,
-})
+})--]]

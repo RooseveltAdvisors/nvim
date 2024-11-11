@@ -47,8 +47,8 @@ local server_definitions = {
       configurationSection = { 'html', 'css', 'javascript' },
     },
 		settings = {},
- 		file_patterns = {'html', 'templ'},
-		docs = 'Install command: npm install -g vscode-languageservers-extracted',
+ 		file_patterns = {'html', 'templ', 'handlebars'},
+		docs = 'Install command: npm install -g vscode-langservers-extracted',
 	},
 	{
 		name = "CSS",
@@ -59,7 +59,7 @@ local server_definitions = {
 		},
 		settings = {},
 		file_patterns = {'css', 'scss', 'sass', 'less'},
-		docs = 'Install command: npm install -g vscode-languageservers-extracted',
+		docs = 'Install command: npm install -g vscode-langservers-extracted',
 	},
 	{
 		name = "HTMX",
@@ -124,7 +124,6 @@ local server_definitions = {
 local function setup_server(name, root_files, cmd, init_opts, settings) 
 	local paths = vim.fs.find(root_files, { stop = vim.env.HOME })
 	local root_dir = vim.fs.dirname(paths[1])
-
 	if root_dir == nil then
 		print("Could not find root directory for " .. name)
 		return
@@ -141,6 +140,7 @@ end
 
 for _, server in ipairs(server_definitions) do
 	local function start_server_callback()
+		-- print("Starting " .. server.name .. " LSP")
 		setup_server(server.name, server.root_files, server.cmd, server.init_opts, server.settings)
 	end
 	
