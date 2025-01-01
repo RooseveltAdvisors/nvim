@@ -119,6 +119,28 @@ local server_definitions = {
     },
 		docs = 'Install command: cargo install htmx-lsp',
 	},
+	{
+		name = "Python",
+		root_files = { ".git" },
+		cmd = { "pyright-langserver", "--stdio" },
+		init_opts = {
+			analysisUpdates = true,
+			extraPaths = {},
+			useLibraryCodeForTypes = true,
+			typeCheckingMode = "basic",
+		},
+		settings = {
+			python = {
+				analysis = {
+					autoSearchPaths = true,
+					autoImportCompletions = true,
+					useLibraryCodeForTypes = true,
+				},
+			},
+		},
+		file_patterns = "python",
+		docs = 'Install command: npm install -g pyright',
+	},
 }
 
 local function setup_server(name, root_files, cmd, init_opts, settings) 
