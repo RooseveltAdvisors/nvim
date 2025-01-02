@@ -120,30 +120,52 @@ local server_definitions = {
 		docs = 'Install command: cargo install htmx-lsp',
 	},
 	{
-		name = "Python",
-		root_files = { ".git" },
+		name= "Python (pyright)",
+		root_files = { "pyproject.toml" },
 		cmd = { "pyright-langserver", "--stdio" },
-		init_opts = {
-			analysisUpdates = true,
-			extraPaths = {},
-			useLibraryCodeForTypes = true,
-			typeCheckingMode = "basic",
-		},
+		init_opts = {},
 		settings = {
+			pyright = {
+				-- Using Ruff's import organizer
+				disableOrganizeImports = true,
+			},
 			python = {
 				analysis = {
-					autoSearchPaths = true,
-					autoImportCompletions = true,
-					useLibraryCodeForTypes = true,
+					-- Ignore all files for analysis to exclusively use Ruff for linting
+					ignore = { '*' },
 				},
 			},
 		},
 		file_patterns = "python",
 		docs = 'Install command: npm install -g pyright',
 	},
+	{
+		name = "Python (ruff)",
+		root_files = { "pyproject.toml" },
+		cmd = { "ruff", "server" },
+		init_opts = {
+			settings = {
+				configurationPreference = "filesystemFirst",
+			}
+		},
+		settings = {
+		},
+		file_patterns = "python",
+		docs = 'Install command: uv tool install ruff',
+		additional_logic = function()
+			local client = vim.lsp.get_client_by_id(args.data.client_id)
+			if client == nil then
+				return
+			end
+			if client.name == 'ruff' then
+      	-- Disable hover in favor of Pyright
+      	client.server_capabilities.hoverProvider = false
+    	end
+		end,
+	},
 }
 
-local function setup_server(name, root_files, cmd, init_opts, settings) 
+local function setup_server(name, root_files, cmd, init_opts, settings, additional_logic) 
 	local paths = vim.fs.find(root_files, { stop = vim.env.HOME })
 	local root_dir = vim.fs.dirname(paths[1])
 	if root_dir == nil then
@@ -158,6 +180,10 @@ local function setup_server(name, root_files, cmd, init_opts, settings)
 		init_options = init_opts,
 		settings = settings,
 	})
+
+	if additional_logic ~= nil then
+		additional_logic()
+	end
 end
 
 for _, server in ipairs(server_definitions) do
