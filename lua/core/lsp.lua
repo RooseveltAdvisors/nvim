@@ -1,3 +1,11 @@
+vim.filetype.add {
+	extension = {
+		jinja = "jinja",
+		jinja2 = "jinja",
+		j2 = "jinja",
+	}
+}
+
 local server_definitions = {
 	{
 		name = "dart",
@@ -47,7 +55,7 @@ local server_definitions = {
       configurationSection = { 'html', 'css', 'javascript' },
     },
 		settings = {},
- 		file_patterns = {'html', 'templ', 'handlebars'},
+ 		file_patterns = {'html', 'templ', 'handlebars', 'jinja'},
 		docs = 'Install command: npm install -g vscode-langservers-extracted',
 	},
 	{
@@ -105,6 +113,7 @@ local server_definitions = {
       'razor',
       'slim',
       'twig',
+			'jinja',
       -- js
       'javascript',
       'javascriptreact',
@@ -164,6 +173,7 @@ local server_definitions = {
 		end,
 	},
 }
+
 
 local function setup_server(name, root_files, cmd, init_opts, settings, additional_logic) 
 	local paths = vim.fs.find(root_files, { stop = vim.env.HOME })
