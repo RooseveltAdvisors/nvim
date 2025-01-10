@@ -36,6 +36,12 @@ return {
 		end
 	},
 	{
+		'mfussenegger/nvim-dap-python',
+		config = function()
+			require('dap-python').setup('uv')
+		end
+	},
+	{
 		'leoluz/nvim-dap-go',
 		config = function() 
 			require('dap-go').setup {
