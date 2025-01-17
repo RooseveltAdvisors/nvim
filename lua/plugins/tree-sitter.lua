@@ -1,6 +1,7 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
+	branch = "master",
 	config = function () 
 		local configs = require("nvim-treesitter.configs")
 
@@ -10,5 +11,7 @@ return {
 				highlight = { enable = true },
 				indent = { enable = true },  
 			})
+		vim.treesitter.language.register("html", "handlebars")
+		vim.treesitter.language.register("html", "jinja")
 	end
 }

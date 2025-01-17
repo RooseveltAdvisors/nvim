@@ -1,10 +1,48 @@
+vim.filetype.add {
+	extension = {
+		jinja = "jinja",
+		jinja2 = "jinja",
+		j2 = "jinja",
+	}
+}
+
 local server_definitions = {
+	{
+		name = "dart",
+		root_files = { "pubspec.yaml" },
+    		cmd = { 'dart', 'language-server', '--protocol=lsp' },
+		init_opts = {
+			closingLabels = true,
+			onlyAnalyzeProjectsWithOpenFiles = true,
+			outline = true,
+			suggestFromUnimportedLibraries = true,
+			flutterOutline = true,
+		},
+		settings = {
+      			dart = {
+        			completeFunctionCalls = true,
+        			showTodos = true,
+      			},
+		},
+		file_patterns = "dart",
+		docs = 'Install Dart with the Flutter SDK',
+	},
+	{
+		name = "rust",
+		root_files = { "Cargo.toml", "rust-project.json" },
+		cmd = { "rust-analyzer" },
+		init_opts = nil,
+		settings = {},
+		file_patterns = "rust",
+		docs = 'Install command: rustup component add rust-src && rustup component add rust-analyzer',
+	},
 	{
 		name = "go",
 		root_files = { "go.mod" },
 		cmd = { "gopls" },
 		init_opts = nil,
 		file_patterns = "go",
+		settings = {},
 		docs = 'Install command: go install golang.org/x/tools/gopls@latest',
 	},
 	{	
@@ -16,8 +54,9 @@ local server_definitions = {
       embeddedLanguages = { css = true, javascript = true },
       configurationSection = { 'html', 'css', 'javascript' },
     },
- 		file_patterns = {'html', 'templ'},
-		docs = 'Install command: npm install -g vscode-languageservers-extracted',
+		settings = {},
+ 		file_patterns = {'html', 'templ', 'handlebars', 'jinja'},
+		docs = 'Install command: npm install -g vscode-langservers-extracted',
 	},
 	{
 		name = "CSS",
@@ -26,8 +65,9 @@ local server_definitions = {
 		init_opts = {
 			provideFormatter = true,
 		},
+		settings = {},
 		file_patterns = {'css', 'scss', 'sass', 'less'},
-		docs = 'Install command: npm install -g vscode-languageservers-extracted',
+		docs = 'Install command: npm install -g vscode-langservers-extracted',
 	},
 	{
 		name = "HTMX",
@@ -36,6 +76,7 @@ local server_definitions = {
 		init_opts = {
 			single_file_supported = true,
 		},
+		settings = {},
 		file_patterns = { -- filetypes copied and adjusted from tailwindcss-intellisense
       -- html
       'aspnetcorerazor',
@@ -72,6 +113,7 @@ local server_definitions = {
       'razor',
       'slim',
       'twig',
+			'jinja',
       -- js
       'javascript',
       'javascriptreact',
@@ -86,12 +128,56 @@ local server_definitions = {
     },
 		docs = 'Install command: cargo install htmx-lsp',
 	},
+	{
+		name= "Python (pyright)",
+		root_files = { "pyproject.toml" },
+		cmd = { "pyright-langserver", "--stdio" },
+		init_opts = {},
+		settings = {
+			pyright = {
+				-- Using Ruff's import organizer
+				disableOrganizeImports = true,
+			},
+			python = {
+				analysis = {
+					-- Ignore all files for analysis to exclusively use Ruff for linting
+					ignore = { '*' },
+				},
+			},
+		},
+		file_patterns = "python",
+		docs = 'Install command: npm install -g pyright',
+	},
+	{
+		name = "Python (ruff)",
+		root_files = { "pyproject.toml" },
+		cmd = { "ruff", "server" },
+		init_opts = {
+			settings = {
+				configurationPreference = "filesystemFirst",
+			}
+		},
+		settings = {
+		},
+		file_patterns = "python",
+		docs = 'Install command: uv tool install ruff',
+		additional_logic = function()
+			local client = vim.lsp.get_client_by_id(args.data.client_id)
+			if client == nil then
+				return
+			end
+			if client.name == 'ruff' then
+      	-- Disable hover in favor of Pyright
+      	client.server_capabilities.hoverProvider = false
+    	end
+		end,
+	},
 }
 
-local function setup_server(name, root_files, cmd, init_opts) 
+
+local function setup_server(name, root_files, cmd, init_opts, settings, additional_logic) 
 	local paths = vim.fs.find(root_files, { stop = vim.env.HOME })
 	local root_dir = vim.fs.dirname(paths[1])
-
 	if root_dir == nil then
 		print("Could not find root directory for " .. name)
 		return
@@ -102,12 +188,18 @@ local function setup_server(name, root_files, cmd, init_opts)
 		cmd = cmd,
 		root_dir = root_dir,
 		init_options = init_opts,
+		settings = settings,
 	})
+
+	if additional_logic ~= nil then
+		additional_logic()
+	end
 end
 
 for _, server in ipairs(server_definitions) do
 	local function start_server_callback()
-		setup_server(server.name, server.root_files, server.cmd, server.init_opts)
+		-- print("Starting " .. server.name .. " LSP")
+		setup_server(server.name, server.root_files, server.cmd, server.init_opts, server.settings)
 	end
 	
 	vim.api.nvim_create_autocmd('FileType', {
