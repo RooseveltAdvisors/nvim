@@ -15,41 +15,47 @@ This is a modern Neovim configuration focused on providing a powerful and effici
 - 2-space indentation by default
 - Code folding with TreeSitter integration
 
-### Key Bindings
-
-#### General Editor Commands
-
-| Shortcut | Mode | Description |
-|----------|------|-------------|
-| `>` | Visual | Indent selection |
-| `<` | Visual | Unindent selection |
-| `Alt + ↑` | Normal/Insert | Move current line up |
-| `Alt + ↓` | Normal/Insert | Move current line down |
-| `Ctrl + D` | Normal/Insert | Delete current line |
-| `Ctrl + S` | Insert | Save file |
-| `F2` | Normal/Insert | Toggle file explorer (NvimTree) |
-
-#### Search and Navigation
+### File Navigation and Search
 
 | Shortcut | Mode | Description |
 |----------|------|-------------|
 | `Ctrl + F` | Normal | Search in files (live grep) |
 | `Ctrl + F Ctrl + F` | Normal | Find files |
-| `z↑` | Normal | Go to previous fold |
-| `z↓` | Normal | Go to next fold |
-| `ee` | Normal | Show diagnostic float |
+| `Space + e` | Normal | Toggle file explorer (NvimTree) |
 
-#### LSP (Language Server Protocol) Features
+### Text Manipulation
+
+| Shortcut | Mode | Description |
+|----------|------|-------------|
+| `>` | Visual | Indent Selection |
+| `<` | Visual | Unindent Selection |
+| `Alt + ↑` | Normal/Insert | Move current line up |
+| `Alt + ↓` | Normal/Insert | Move current line down |
+| `Ctrl + D` | Normal/Insert | Delete current line |
+| `Ctrl + S` | Insert | Save file |
+
+### Code Navigation and LSP Features
 
 | Shortcut | Mode | Description |
 |----------|------|-------------|
 | `Ctrl + Space` | Insert | Trigger code completion |
-| `F1` | Normal | Show hover documentation |
-| `Alt + ]` | Normal | Show references |
-| `Ctrl + R` | Normal/Insert | Rename symbol |
-| `F4` | Normal | Show code actions |
+| `K` | Normal | Show hover documentation |
+| `gr` | Normal | Show references |
+| `gd` | Normal | Go to definition |
+| `Space + rn` | Normal | Rename symbol |
+| `Space + ca` | Normal | Show code actions |
+| `ee` | Normal | Show diagnostic float |
+| `[d` | Normal | Go to previous diagnostic |
+| `]d` | Normal | Go to next diagnostic |
 
-#### Terminal
+### Code Folding
+
+| Shortcut | Mode | Description |
+|----------|------|-------------|
+| `[z` | Normal | Go to previous fold |
+| `]z` | Normal | Go to next fold |
+
+### Terminal
 
 | Shortcut | Mode | Description |
 |----------|------|-------------|
@@ -73,6 +79,37 @@ The configuration includes several carefully selected plugins to enhance the dev
 ## Plugin Management
 
 This configuration uses the Lazy plugin manager for efficient plugin management. Plugins are loaded lazily to ensure fast startup times. The space key (`<Space>`) is configured as the leader key for plugin commands.
+
+### Using Lazy Plugin Manager
+
+You can access Lazy's interface in two ways:
+1. Press `<Space>L` (Space followed by capital L)
+2. Type `:Lazy` in command mode
+
+Common Lazy commands:
+| Command | Description |
+|---------|-------------|
+| `:Lazy` | Open Lazy UI |
+| `:Lazy install` | Install missing plugins |
+| `:Lazy update` | Update plugins |
+| `:Lazy clean` | Clean unused plugins |
+| `:Lazy check` | Check for updates |
+| `:Lazy log` | Open Lazy log |
+| `:Lazy restore` | Restore plugin state |
+| `:Lazy profile` | Profile startup time |
+
+### Leader Key Usage
+
+The Space key is configured as the leader key. This means:
+1. Press `<Space>` (the leader key)
+2. Followed by the specific command key
+
+Common leader key combinations:
+- `<Space>L` - Open Lazy plugin manager
+- `<Space>ff` - Find files (Telescope)
+- `<Space>fg` - Live grep (Telescope)
+- `<Space>fb` - Browse buffers
+- `<Space>e` - Toggle file explorer
 
 ## File Structure
 
