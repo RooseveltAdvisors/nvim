@@ -2,6 +2,8 @@
 
 This is a modern Neovim configuration focused on providing a powerful and efficient development environment. The configuration is organized using Lua and includes various plugins managed by the Lazy plugin manager.
 
+> **Credit**: This configuration is based on the work of [@BlindGarret](https://github.com/BlindGarret). All credit goes to him for creating this excellent Neovim setup.
+
 ## Core Features
 
 ### Basic Settings
@@ -91,7 +93,7 @@ This configuration uses the Lazy plugin manager for efficient plugin management.
 
 1. Clone this repository to your Neovim configuration directory:
    ```bash
-   git clone https://github.com/yourusername/nvim-config ~/.config/nvim
+   git clone https://github.com/BlindGarret/nvim.git ~/.config/nvim
    ```
 
 2. Start Neovim - the configuration will automatically:
@@ -127,7 +129,7 @@ To customize this configuration:
 
 2. Clone this repository to your Neovim configuration directory:
    ```bash
-   git clone https://github.com/yourusername/nvim-config ~/.config/nvim
+   git clone https://github.com/BlindGarret/nvim.git ~/.config/nvim
    ```
 
 3. Start Neovim - the configuration will automatically:
