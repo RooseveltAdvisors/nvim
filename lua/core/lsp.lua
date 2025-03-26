@@ -172,6 +172,40 @@ local server_definitions = {
     	end
 		end,
 	},
+	{
+		name = "lua",
+		root_files = { ".git" },  -- This will work in any git repository
+		cmd = { "lua-language-server" },
+		init_opts = nil,
+		settings = {
+			Lua = {
+				runtime = {
+					version = 'LuaJIT',
+				},
+				diagnostics = {
+					globals = {'vim'},
+				},
+				workspace = {
+					library = vim.api.nvim_get_runtime_file("", true),
+					checkThirdParty = false,
+				},
+				telemetry = {
+					enable = false,
+				},
+			},
+		},
+		file_patterns = "lua",
+		docs = 'Install command: brew install lua-language-server',
+	},
+	{
+		name = "typescript",
+		root_files = { "package.json", "tsconfig.json", "jsconfig.json", ".git" },
+		cmd = { "typescript-language-server", "--stdio" },
+		init_opts = nil,
+		settings = {},
+		file_patterns = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+		docs = 'Install command: npm install -g typescript typescript-language-server',
+	},
 }
 
 

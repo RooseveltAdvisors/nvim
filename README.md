@@ -111,13 +111,76 @@ To customize this configuration:
 3. Update plugin configurations in the `lua/plugins/` directory
 4. Adjust LSP settings in `lua/core/lsp.lua`
 
+## Language Server Protocol (LSP) Setup
+
+This configuration includes support for multiple language servers. To enable LSP features (code completion, rename, hover docs, etc.), you need to install the language servers for your programming languages:
+
+### Supported Languages and Installation Commands
+
+```bash
+# Dart (requires Flutter SDK)
+dart language-server --protocol=lsp
+
+# Rust
+rustup component add rust-src
+rustup component add rust-analyzer
+
+# Go
+go install golang.org/x/tools/gopls@latest
+
+# HTML/CSS
+npm install -g vscode-langservers-extracted
+
+# HTMX
+cargo install htmx-lsp
+
+# Python
+npm install -g pyright  # For type checking
+pip install ruff       # For linting
+
+# Additional Recommended Servers
+brew install lua-language-server          # For Lua
+npm install -g typescript-language-server # For TypeScript/JavaScript
+```
+
+### LSP Features
+
+The following LSP features are configured:
+
+| Shortcut | Mode | Description |
+|----------|------|-------------|
+| `Ctrl + Space` | Insert | Trigger code completion |
+| `F1` | Normal | Show hover documentation |
+| `Alt + ]` | Normal | Show references |
+| `Ctrl + R` | Normal/Insert | Rename symbol |
+| `F4` | Normal | Show code actions |
+| `ee` | Normal | Show diagnostic float |
+
+### Diagnostic Signs
+
+The following diagnostic signs are used in the gutter:
+
+| Sign | Meaning |
+|------|---------|
+| ✘ | Error |
+| ▲ | Warning |
+| ⚑ | Hint |
+| » | Information |
+
 ## Requirements
 
 - Neovim >= 0.8.0
 - Git (for plugin management)
-- A Nerd Font (for icons)
 - Ripgrep (`brew install ripgrep`) - Required for Telescope's live grep functionality
-- Various language servers for LSP features
+- A Nerd Font (for icons)
+- Node.js and npm (for certain language servers)
+- Language-specific toolchains as needed:
+  - Go
+  - Rust
+  - Python
+  - Node.js
+  - Cargo
+  - Flutter SDK (for Dart)
 
 ## Installation
 
