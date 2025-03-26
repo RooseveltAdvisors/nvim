@@ -18,9 +18,11 @@ vim.keymap.set('n', '<C-f>', '<cmd>Telescope live_grep<cr>' , {desc = 'Find in f
 vim.keymap.set('n', '<C-f><C-f>', '<cmd>Telescope find_files<cr>' , {desc = 'Find files'})
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>' , {desc = 'Escape Terminal'})
 
--- Code folding (fixed)
-vim.keymap.set('n', '[z', 'zk', {desc = 'Previous Fold'})
-vim.keymap.set('n', ']z', 'zj', {desc = 'Next Fold'})
+-- Code folding (both styles available)
+vim.keymap.set('n', 'z<Up>', 'zk', {desc = 'Previous Fold'})
+vim.keymap.set('n', 'z<Down>', 'zj', {desc = 'Next Fold'})
+vim.keymap.set('n', '[z', 'zk', {desc = 'Previous Fold (Alternative)'})
+vim.keymap.set('n', ']z', 'zj', {desc = 'Next Fold (Alternative)'})
 
 -- Diagnostics
 vim.keymap.set('n', 'ee', '<cmd>lua vim.diagnostic.open_float()<cr>', {desc = 'Show Error'})

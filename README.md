@@ -52,8 +52,10 @@ This is a modern Neovim configuration focused on providing a powerful and effici
 
 | Shortcut | Mode | Description |
 |----------|------|-------------|
-| `[z` | Normal | Go to previous fold |
-| `]z` | Normal | Go to next fold |
+| `z↑` | Normal | Go to previous fold |
+| `z↓` | Normal | Go to next fold |
+| `[z` | Normal | Go to previous fold (Alternative) |
+| `]z` | Normal | Go to next fold (Alternative) |
 
 ### Terminal
 
