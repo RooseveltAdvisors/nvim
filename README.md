@@ -44,6 +44,7 @@ This is a modern Neovim configuration focused on providing a powerful and effici
 | `gd` | Normal | Go to definition |
 | `Space + rn` | Normal | Rename symbol |
 | `Space + ca` | Normal | Show code actions |
+| `Space + ds` | Normal | Show document symbols |
 | `ee` | Normal | Show diagnostic float |
 | `[d` | Normal | Go to previous diagnostic |
 | `]d` | Normal | Go to next diagnostic |

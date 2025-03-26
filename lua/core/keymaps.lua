@@ -16,6 +16,7 @@ vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', {desc = 'Toggle Tree'})
 -- Telescope
 vim.keymap.set('n', '<C-f>', '<cmd>Telescope live_grep<cr>' , {desc = 'Find in files'})
 vim.keymap.set('n', '<C-f><C-f>', '<cmd>Telescope find_files<cr>' , {desc = 'Find files'})
+vim.keymap.set('n', '<leader>ds', '<cmd>Telescope lsp_document_symbols<cr>', {desc = 'Document Symbols'})
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>' , {desc = 'Escape Terminal'})
 
 -- Code folding (both styles available)
